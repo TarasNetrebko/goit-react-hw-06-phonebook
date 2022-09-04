@@ -11,7 +11,6 @@ export const contactReducer = (
 ) => {
   switch (type) {
     case ADD_CONTACT:
-      console.log(payload);
       return [...state, payload];
     case DELETE_CONTACT:
       return state.filter(contact => contact.id !== payload);

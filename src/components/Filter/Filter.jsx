@@ -1,14 +1,16 @@
 import { LabelFilter, Input } from '../PhonebookForm/PhonebookForm.styled';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFilter } from 'components/redux/filter/selector';
+import { changeFilter } from 'components/redux/filter/actions';
 
-export const Filter = ({value, onChange}) => (
-  <LabelFilter>
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter)
+  const onChangeFilter = (e) => {
+    dispatch(changeFilter(e.target.value))
+  } 
+  return <LabelFilter>
     Find contacts by name
-    <Input type="text" value={value} onChange={onChange} />
+    <Input type="text" value={filter} onChange={onChangeFilter} />
   </LabelFilter>
-);
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func.isRequired
 }

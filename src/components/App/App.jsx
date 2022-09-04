@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { PhonebookForm } from '../PhonebookForm/PhonebookForm';
 import { PhonebookList } from '../PhonebookList/PhonebookList';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeContacts } from 'components/redux/contacts/actions';
 import { getContacts } from 'components/redux/contacts/selector';
+import { getFilter } from 'components/redux/filter/selector';
 import { ContentContainer } from './App.styled';
 import { Filter } from '../Filter/Filter';
 
 export const App = () => {
   // const [isFirstMount, setIsFirstMount] = useState(true);
-  const [filter, setFilter] = useState("");
   const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter)
   const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem('contacts') !== null) {
@@ -33,12 +34,7 @@ export const App = () => {
   //   }
   //   // eslint-disable-next-line
   // }, [contacts])
-
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
-
-    const normalizedFilter = filter.toLowerCase();
+  const normalizedFilter = filter.toLowerCase();
   const filteredContacts = contacts.filter(contact => {
     return (contact.name.toLowerCase().includes(normalizedFilter) || contact.number.includes(normalizedFilter))
     }
@@ -60,7 +56,7 @@ export const App = () => {
           <h1>Phonebook</h1>
           <PhonebookForm />
           <h2>Contacts</h2>
-          <Filter value={filter} onChange={changeFilter} />
+          <Filter/>
           <PhonebookList
             contacts={filteredContacts}
           />
