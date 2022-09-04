@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { PhonebookForm } from '../PhonebookForm/PhonebookForm';
 import { PhonebookList } from '../PhonebookList/PhonebookList';
-import { useSelector, useDispatch } from 'react-redux';
-import { changeContacts } from 'components/redux/contacts/actions';
+import { useSelector } from 'react-redux';
 import { getContacts } from 'components/redux/contacts/selector';
 import { getFilter } from 'components/redux/filter/selector';
 import { ContentContainer } from './App.styled';
@@ -12,17 +11,6 @@ export const App = () => {
   // const [isFirstMount, setIsFirstMount] = useState(true);
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter)
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (localStorage.getItem('contacts') !== null) {
-        dispatch(changeContacts(JSON.parse(localStorage.getItem('contacts'))))
-    }
-    // eslint-disable-next-line
-  }, [])
-  useEffect(() => {
-      localStorage.setItem('contacts', JSON.stringify(contacts))
-    // eslint-disable-next-line
-  }, [contacts])
   // useEffect(() => {
   //   if (isFirstMount) {
   //     if (localStorage.getItem('contacts') !== null) {

@@ -1,13 +1,6 @@
 import { ADD_CONTACT, DELETE_CONTACT, CHANGE_CONTACTS } from './action-types';
+import { createAction } from '@reduxjs/toolkit';
 
-export const addContact = contact => {
-  return { type: ADD_CONTACT, payload: contact };
-};
-
-export const deleteContact = id => {
-  return { type: DELETE_CONTACT, payload: id };
-};
-
-export const changeContacts = contacts => {
-  return { type: CHANGE_CONTACTS, payload: contacts };
-};
+export const addContact = createAction(ADD_CONTACT);
+export const deleteContact = createAction(DELETE_CONTACT);
+export const changeContacts = createAction(CHANGE_CONTACTS);
