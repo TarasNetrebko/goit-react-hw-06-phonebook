@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PhonebookForm } from '../PhonebookForm/PhonebookForm';
 import { PhonebookList } from '../PhonebookList/PhonebookList';
-import { useSelector } from 'react-redux';
-// import { changeContacts } from 'components/redux/contacts/actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeContacts } from 'components/redux/contacts/actions';
 import { getContacts } from 'components/redux/contacts/selector';
 import { ContentContainer } from './App.styled';
 import { Filter } from '../Filter/Filter';
@@ -11,11 +11,22 @@ export const App = () => {
   // const [isFirstMount, setIsFirstMount] = useState(true);
   const [filter, setFilter] = useState("");
   const contacts = useSelector(getContacts);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem('contacts') !== null) {
+        dispatch(changeContacts(JSON.parse(localStorage.getItem('contacts'))))
+    }
+    // eslint-disable-next-line
+  }, [])
+  useEffect(() => {
+      localStorage.setItem('contacts', JSON.stringify(contacts))
+    // eslint-disable-next-line
+  }, [contacts])
   // useEffect(() => {
   //   if (isFirstMount) {
-  //     localStorage.getItem('contacts') !== null
-  //     && dispatch(changeContacts(JSON.parse(localStorage.getItem('contacts'))))
+  //     if (localStorage.getItem('contacts') !== null) {
+  //       dispatch(changeContacts(JSON.parse(localStorage.getItem('contacts'))))
+  //     }
   //     setIsFirstMount(false);
   //   } else {
   //     localStorage.setItem('contacts', JSON.stringify(contacts))
