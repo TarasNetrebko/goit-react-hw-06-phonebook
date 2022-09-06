@@ -1,6 +1,6 @@
 import { ContactElement, Button } from "./ListElem.styled"
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'components/redux/contacts/actions';
+import { deleteContact } from 'redux/contacts/actions';
 
 import PropTypes from "prop-types"
 

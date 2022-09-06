@@ -2,8 +2,8 @@ import React from 'react';
 import { PhonebookForm } from '../PhonebookForm/PhonebookForm';
 import { PhonebookList } from '../PhonebookList/PhonebookList';
 import { useSelector } from 'react-redux';
-import { getContacts } from 'components/redux/contacts/selector';
-import { getFilter } from 'components/redux/filter/selector';
+import { getContacts } from 'redux/contacts/selector';
+import { getFilter } from 'redux/filter/selector';
 import { ContentContainer } from './App.styled';
 import { Filter } from '../Filter/Filter';
 

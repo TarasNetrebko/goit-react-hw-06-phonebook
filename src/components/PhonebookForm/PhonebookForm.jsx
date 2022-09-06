@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
-import { addContact } from 'components/redux/contacts/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contacts/actions';
+import { getContacts } from 'redux/contacts/selector';
 import { Form, Label, Input, Button } from './PhonebookForm.styled';
 
 export const PhonebookForm =() => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
   const handleChange = e => {
     e.target.name === "name" ? setName(e.target.value) : setNumber(e.target.value);
@@ -19,17 +21,18 @@ export const PhonebookForm =() => {
       name,
       number,
     };
+    let isExisted = false;
+    contacts.map(contact => {
+      contact.name === name && (isExisted = true);
+      return contact;
+    });
+    isExisted
+    ? alert(`${name} is already in contacts`)
+    : dispatch(addContact(contact));
       setName("");
       setNumber("");
-    dispatch(addContact(contact));
-    // let isExisted = false;
-    // contacts.map(contact => {
-    //   contact.name === name && (isExisted = true);
-    //   return contact;
-    // });
-    // isExisted
-    //   ? alert(`${name} is already in contacts`)
-    //   : setContacts([newContact, ...contacts])
+    
+    
   };
     return (
       <Form action="" onSubmit={formSubmitHandler}>

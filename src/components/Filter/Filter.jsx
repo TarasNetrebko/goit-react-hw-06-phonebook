@@ -1,7 +1,7 @@
 import { LabelFilter, Input } from '../PhonebookForm/PhonebookForm.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFilter } from 'components/redux/filter/selector';
-import { changeFilter } from 'components/redux/filter/actions';
+import { getFilter } from 'redux/filter/selector';
+import { changeFilter } from 'redux/filter/actions';
 
 export const Filter = () => {
   const dispatch = useDispatch();
